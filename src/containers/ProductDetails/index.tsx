@@ -3,11 +3,14 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 
 import { ProductDetails } from '../../components';
+import Helmet from 'react-helmet';
 
 interface ProductObj {
   id: number;
   name: string;
   amount: number;
+  price: number;
+  thumbnail: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -21,10 +24,8 @@ interface ProductDetailsObj {
   data: {
     loading: Boolean;
     error: string;
-    networkStatus: Boolean;
+    networkStatus: number;
     productById: ProductObj;
-    search: object;
-    loadMore: Function;
   };
 }
 
@@ -32,15 +33,21 @@ function ProductDetailsContainer({ data }: ProductDetailsObj) {
 
   return (
     <div>
+      <Helmet>
+        <title>{!data.loading && data.networkStatus === 7 ? data.productById.name : ''}</title>
+      </Helmet>
+
       {
-        data.loading ? 'loading ...' :
+        !data.loading && data.networkStatus === 7 ?
           <ProductDetails
             id={data.productById.id}
             name={data.productById.name}
             amount={data.productById.amount}
+            price={data.productById.price}
+            thumbnail={data.productById.thumbnail}
             createdAt={data.productById.createdAt}
             updatedAt={data.productById.updatedAt}
-          />
+          /> : 'loading ...'
       }
     </div>
   );
@@ -52,6 +59,8 @@ const productDetailsQuery = gql`
       id
       name
       amount
+      price
+      thumbnail
       createdAt
       updatedAt
     }

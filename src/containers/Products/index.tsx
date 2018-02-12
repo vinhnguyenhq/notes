@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 
 import { ProductLine } from '../../components';
+import Helmet from 'react-helmet';
 
 interface ProductObj {
   id: number;
@@ -17,7 +18,7 @@ interface ProductsObj {
   data: {
     loading: Boolean;
     error: string;
-    networkStatus: Boolean;
+    networkStatus: number;
     products: ProductObj[];
   };
 }
@@ -26,17 +27,19 @@ function Products({ data, match }: ProductsObj) {
 
   return (
     <div>
-      {
-        data.loading ? <div className="loading">loading ...</div> :
-          data.products.map((post, index) =>
-            <ProductLine
-              key={index}
-              id={post.id}
-              name={post.name}
-              match={match}
-            />
-          )
-      }
+      <Helmet>
+        <title>Products</title>
+      </Helmet>
+
+      {!data.loading && data.networkStatus === 7 ?
+        data.products.map((post, index) =>
+          <ProductLine
+            key={index}
+            id={post.id}
+            name={post.name}
+            match={match}
+          />
+        ) : <div className="loading">loading ...</div>}
     </div>
   );
 }

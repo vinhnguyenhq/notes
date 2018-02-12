@@ -7,6 +7,8 @@ const typeDefs = `
     id: Int!
     name: String!
     amount: Int!
+    price: Int
+    thumbnail: String
     createdAt: String
     updatedAt: String
   }

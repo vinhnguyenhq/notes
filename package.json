@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/react-helmet": "^5.0.3",
     "apollo-cache-inmemory": "^1.1.7",
     "apollo-client": "^2.0.4",
     "apollo-client-preset": "^1.0.8",
@@ -22,6 +23,7 @@
     "react-css-modules": "^4.7.1",
     "react-dom": "^16.2.0",
     "react-google-login": "^3.0.4",
+    "react-helmet": "^5.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
@@ -36,8 +38,8 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "@types/enzyme-adapter-react-16": "^1.0.1",
     "@types/enzyme": "^3.1.8",
+    "@types/enzyme-adapter-react-16": "^1.0.1",
     "@types/express": "^4.11.1",
     "@types/graphql": "^0.12.3",
     "@types/jest": "^22.1.1",

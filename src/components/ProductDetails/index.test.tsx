@@ -14,6 +14,8 @@ it('renders the correct name element with an explicit input', () => {
         id={1}
         name="Vinh Nguyen"
         amount={25}
+        price={150000}
+        thumbnail=""
         createdAt="2017-05-01T19:08:49Z"
         updatedAt="2017-05-01T19:08:49Z"
       />
@@ -29,6 +31,8 @@ it('renders the correct amount element with an explicit input', () => {
         id={1}
         name="Vinh Nguyen"
         amount={25}
+        price={150000}
+        thumbnail=""
         createdAt="2017-05-01T19:08:49Z"
         updatedAt="2017-05-01T19:08:49Z"
       />
