@@ -18,12 +18,13 @@ function ProductDetails({ id, name, amount, price, thumbnail, createdAt, updated
     <div className="card">
       <img src={thumbnail} alt={name} style={{ width: '100%' }} />
       <h1>{name}</h1>
-      <p className="title">{`amount is ${amount}`}</p>
-      <p>{`$${price.toLocaleString()}`}</p>
+      <p>{`ID: ${id}`}</p>
+      <p className="title">{`Amount: ${amount}`}</p>
+      <p>{`Price: $${price.toLocaleString()}`}</p>
       <p>Create - {new Date(createdAt).toLocaleString()}</p>
       <p>Update - {new Date(updatedAt).toLocaleString()}</p>
-      <Link to={`/products`}>
-        <button>Back</button>
+      <Link className="back" to={`/products`}>
+        Back
       </Link>
     </div>
   );
