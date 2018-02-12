@@ -6,7 +6,8 @@ import { ProductLine } from '../../components';
 
 interface ProductObj {
   id: number;
-  title: string;
+  name: string;
+  amount: number;
 }
 
 interface ProductsObj {
@@ -17,7 +18,7 @@ interface ProductsObj {
     loading: Boolean;
     error: string;
     networkStatus: Boolean;
-    posts: ProductObj[];
+    products: ProductObj[];
     search: object;
     loadMore: Function;
   };
@@ -29,31 +30,26 @@ function Products({ data, match }: ProductsObj) {
     <div>
       <h2>Products</h2>
 
-      {data.posts ?
-        data.posts.map((post, index) =>
-          <ProductLine
-            key={index}
-            id={post.id}
-            title={post.title}
-            match={match}
-          />) : null}
+      {
+        data.loading ? 'loading ...' :
+          data.products.map((post, index) =>
+            <ProductLine
+              key={index}
+              id={post.id}
+              name={post.name}
+              match={match}
+            />)
+      }
     </div>
   );
 }
 
 const productsQuery = gql`
-  query ($q: String!, $end: String) {
-    search(first: 20, type: REPOSITORY, query: $q, after: $end) {
-      nodes {
-        ... on Repository {
-          name
-          url
-        }
-      }
-      pageInfo {
-        endCursor
-        hasNextPage
-      }
+  query {
+    products {
+      id
+      name
+      amount
     }
   }
 `;

@@ -14,12 +14,15 @@ const client = new ApolloClient({
 });
 
 const productsQuery = gql`
-  query {
-    getPosts {
-      id
-      title
-    }
+query {
+  productById(id: 2) {
+    id
+    name
+    amount
+    createdAt
+    updatedAt
   }
+}
 `;
 
 client.query({ query: productsQuery }).then(response => console.log(response));

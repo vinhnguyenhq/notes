@@ -3,16 +3,16 @@ import { Link } from 'react-router-dom';
 
 interface ProductLineProps {
   id: number;
-  title: string;
+  name: string;
   match: {
     url: string
   };
 }
 
-function ProductLine({ id, title, match }: ProductLineProps) {
+function ProductLine({ id, name, match }: ProductLineProps) {
   return (
     <div>
-      <Link to={`${match.url}/${id}`}>{title}</Link>
+      <Link to={`${match.url}/${id}`}>{name}</Link>
     </div>
   );
 }

@@ -5,6 +5,7 @@ const products = require('./data.json');
 const resolvers = {
   Query: {
     products: () => products,
+    productById: (_, { id }) => find(products, { id: id })
   },
   Mutation: {
     createProduct: (_, { name, amount }) => {

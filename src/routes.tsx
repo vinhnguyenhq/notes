@@ -6,8 +6,8 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import { Hello, ProductDetails } from './components/index';
-import { Products } from './containers/index';
+import { Hello } from './components/index';
+import { Products, ProductDetails } from './containers/index';
 
 class Routes extends React.Component {
 
