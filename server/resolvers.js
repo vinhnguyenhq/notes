@@ -4,8 +4,20 @@ const products = require('./data.json');
 
 const resolvers = {
   Query: {
-    products: () => products,
-    productById: (_, { id }) => find(products, { id: id })
+    products: (_, { currentIndex }) => {
+      if (!currentIndex) {
+        return products;
+      }
+
+      if (currentIndex < 0) {
+        return [];
+      } else {
+        return products.filter(ele => {
+          return ele.id > currentIndex && ele.id < currentIndex + 10;
+        });
+      }
+    },
+    productById: (_, { id }) => find(products, { id: id }),
   },
   Mutation: {
     createProduct: (_, { name, amount }) => {

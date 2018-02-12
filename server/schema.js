@@ -12,7 +12,7 @@ const typeDefs = `
   }
   #The root of all queries:
   type Query {
-    products: [Product]
+    products(currentId: Int): [Product]
     productById(id: Int!): Product
   }
   type Mutation {

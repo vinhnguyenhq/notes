@@ -1,22 +1,57 @@
 /* tslint:disable */
 import * as React from 'react';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Route,
   Link,
   Switch,
+  Redirect,
+  RouteComponentProps,
+  RouteProps
 } from 'react-router-dom';
 
-import { Hello } from './components/index';
-import { Products, ProductDetails } from './containers/index';
+import { Products, ProductDetails, Home } from './containers/index';
 
 require('./routes.css');
+
+export const isLoggedIn = () => {
+  const auth = localStorage.getItem('auth');
+  if (auth && auth !== '') {
+    return true;
+  }
+  return false;
+};
+
+type RouteComponent = React.StatelessComponent<RouteComponentProps<{}>> | React.ComponentClass<any>
+
+const PrivateRoute: React.StatelessComponent<RouteProps> = ({ component, ...rest }) => {
+  const renderFn = (Component?: RouteComponent) => (props: RouteProps) => {
+    if (!Component) {
+      return null
+    }
+
+    if (isLoggedIn()) {
+      return <Component {...props} />
+    }
+
+    const redirectProps = {
+      to: {
+        pathname: "/",
+        state: { from: props.location },
+      },
+    }
+
+    return <Redirect {...redirectProps} />
+  }
+
+  return <Route {...rest} render={renderFn(component)} />
+}
 
 class Routes extends React.Component {
 
   render() {
     return (
-      <Router>
+      <BrowserRouter>
         <div className="wrapper">
           <div className="navbar">
             <Link to="/">Home</Link>
@@ -24,13 +59,13 @@ class Routes extends React.Component {
           </div>
           <div className="main">
             <Switch>
-              <Route exact={true} path="/" component={Hello} />
-              <Route path="/products/:productId" component={ProductDetails} />
-              <Route path="/products" component={Products} />
+              <Route exact={true} path="/" component={Home} />
+              <PrivateRoute path="/products/:productId" component={ProductDetails} />
+              <PrivateRoute path="/products" component={Products} />
             </Switch>
           </div>
         </div>
-      </Router>
+      </BrowserRouter>
     );
   }
 }
