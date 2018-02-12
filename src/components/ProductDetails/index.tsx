@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+
+require('./index.css');
 
 interface ProductDetailsProps {
   id: number;
@@ -10,13 +13,16 @@ interface ProductDetailsProps {
 
 function ProductDetails({ id, name, amount, createdAt, updatedAt }: ProductDetailsProps) {
   return (
-    <div>
-      <h3>ProductDetails - {name}</h3>
-      <h4>{amount}</h4>
-      <ul>
-        <li>{new Date(createdAt).toLocaleString()}</li>
-        <li>{new Date(updatedAt).toLocaleString()}</li>
-      </ul>
+    <div className="card">
+      <h1>{name}</h1>
+      <p className="title">{amount}</p>
+      <div>
+        <p>Create - {new Date(createdAt).toLocaleString()}</p>
+        <p>Update - {new Date(updatedAt).toLocaleString()}</p>
+      </div>
+      <Link to={`/products`}>
+        <p><button>Back</button></p>
+      </Link>
     </div>
   );
 }

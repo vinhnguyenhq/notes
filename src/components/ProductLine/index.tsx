@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+require('./index.css');
+
 interface ProductLineProps {
   id: number;
   name: string;
@@ -11,8 +13,12 @@ interface ProductLineProps {
 
 function ProductLine({ id, name, match }: ProductLineProps) {
   return (
-    <div>
-      <Link to={`${match.url}/${id}`}>{name}</Link>
+    <div className="card">
+      <Link to={`${match.url}/${id}`}>
+        <div className="container">
+          <h4>{name}</h4>
+        </div>
+      </Link>
     </div>
   );
 }

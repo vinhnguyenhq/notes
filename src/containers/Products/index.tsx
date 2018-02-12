@@ -28,8 +28,6 @@ function Products({ data, match }: ProductsObj) {
 
   return (
     <div>
-      <h2>Products</h2>
-
       {
         data.loading ? 'loading ...' :
           data.products.map((post, index) =>
