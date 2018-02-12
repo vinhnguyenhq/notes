@@ -21,8 +21,8 @@ function ProductDetails({ id, name, amount, price, thumbnail, createdAt, updated
       <p>{`ID: ${id}`}</p>
       <p className="title">{`Amount: ${amount}`}</p>
       <p>{`Price: $${price.toLocaleString()}`}</p>
-      <p>Create - {new Date(createdAt).toLocaleString()}</p>
-      <p>Update - {new Date(updatedAt).toLocaleString()}</p>
+      <p>Created - {new Date(createdAt).toLocaleString()}</p>
+      <p>Updated - {new Date(updatedAt).toLocaleString()}</p>
       <Link className="back" to={`/products`}>
         Back
       </Link>
