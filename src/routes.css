@@ -1,6 +1,6 @@
 .wrapper {
     max-width: 1000px;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .navbar {
@@ -26,5 +26,5 @@
 }
 
 .main {
-    margin: 100px 100px;
+    margin: 100px auto;
 }

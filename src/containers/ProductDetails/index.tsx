@@ -4,6 +4,7 @@ import { graphql } from 'react-apollo';
 
 import { ProductDetails } from '../../components';
 import Helmet from 'react-helmet';
+import { Redirect } from 'react-router';
 
 interface ProductObj {
   id: number;
@@ -30,6 +31,10 @@ interface ProductDetailsObj {
 }
 
 function ProductDetailsContainer({ data }: ProductDetailsObj) {
+
+  if (!data.loading && data.networkStatus === 7 && !data.productById) {
+    return <Redirect to="/products" />;
+  }
 
   return (
     <div>

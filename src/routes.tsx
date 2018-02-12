@@ -61,6 +61,7 @@ class Routes extends React.Component {
               <Route exact={true} path="/" component={Home} />
               <PrivateRoute path="/products/:productId" component={ProductDetails} />
               <PrivateRoute path="/products" component={Products} />
+              <Route path="*" component={Home} />
             </Switch>
           </div>
         </div>

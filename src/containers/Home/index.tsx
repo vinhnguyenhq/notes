@@ -14,13 +14,13 @@ interface HomeObj {
 
 function Home({ history }: HomeObj) {
 
-  const responseGoogle = (response: object) => {
+  const onGoogleLoginHandler = (response: object) => {
     const authString = JSON.stringify(response);
     localStorage.setItem('auth', authString);
     history.push('/');
   };
 
-  const logoutHandle = () => {
+  const onLogoutHandler = () => {
     localStorage.removeItem('auth');
     history.push('/');
   };
@@ -41,14 +41,14 @@ function Home({ history }: HomeObj) {
       {isLoggedIn() ?
         <div>
           <h3>{`Welcom to this site, ${getCurrentUserName()}`}</h3>
-          <a className="button" href="#" onClick={() => logoutHandle()}>Logout</a>
+          <a className="button" href="#" onClick={() => onLogoutHandler()}>Logout</a>
         </div> :
-        (<GoogleLogin
+        <GoogleLogin
           clientId="954634457832-fsmitrknpf68nbf759q35em8h0p5fujc.apps.googleusercontent.com"
           buttonText="Google Login"
-          onSuccess={responseGoogle}
-          onFailure={responseGoogle}
-        />)}
+          onSuccess={onGoogleLoginHandler}
+          onFailure={onGoogleLoginHandler}
+        />}
     </div>
   );
 }
