@@ -1,4 +1,3 @@
-/* tslint:disable */
 import * as React from 'react';
 import {
   BrowserRouter,
@@ -22,30 +21,30 @@ export const isLoggedIn = () => {
   return false;
 };
 
-type RouteComponent = React.StatelessComponent<RouteComponentProps<{}>> | React.ComponentClass<any>
+type RouteComponent = React.StatelessComponent<RouteComponentProps<{}>> | React.ComponentClass<{}>;
 
 const PrivateRoute: React.StatelessComponent<RouteProps> = ({ component, ...rest }) => {
   const renderFn = (Component?: RouteComponent) => (props: RouteProps) => {
     if (!Component) {
-      return null
+      return null;
     }
 
     if (isLoggedIn()) {
-      return <Component {...props} />
+      return <Component {...props} />;
     }
 
     const redirectProps = {
       to: {
-        pathname: "/",
+        pathname: '/',
         state: { from: props.location },
       },
-    }
+    };
 
-    return <Redirect {...redirectProps} />
-  }
+    return <Redirect {...redirectProps} />;
+  };
 
-  return <Route {...rest} render={renderFn(component)} />
-}
+  return <Route {...rest} render={renderFn(component)} />;
+};
 
 class Routes extends React.Component {
 

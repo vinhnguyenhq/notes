@@ -19,8 +19,6 @@ interface ProductsObj {
     error: string;
     networkStatus: Boolean;
     products: ProductObj[];
-    search: object;
-    loadMore: Function;
   };
 }
 
@@ -29,14 +27,15 @@ function Products({ data, match }: ProductsObj) {
   return (
     <div>
       {
-        data.loading ? 'loading ...' :
+        data.loading ? <div className="loading">loading ...</div> :
           data.products.map((post, index) =>
             <ProductLine
               key={index}
               id={post.id}
               name={post.name}
               match={match}
-            />)
+            />
+          )
       }
     </div>
   );
@@ -52,8 +51,6 @@ const productsQuery = gql`
   }
 `;
 
-const ProductsWithQuery = graphql<{}, ProductsObj>(productsQuery, {
-  options: {}
-})(Products);
+const ProductsWithQuery = graphql<{}, ProductsObj>(productsQuery)(Products);
 
 export default ProductsWithQuery;
